@@ -1,0 +1,14 @@
+{
+  "bouygue.txt": {
+    "fichier": "bouygue.txt",
+    "nom": "Bouygue",
+    "lignes": 6314574,
+    "chemin": "bases\\bouygue.txt"
+  },
+  "DBFILTRE178_NETTOYE.txt": {
+    "fichier": "DBFILTRE178_NETTOYE.txt",
+    "nom": "Dbfiltre178 Nettoye",
+    "lignes": 178399,
+    "chemin": "bases\\DBFILTRE178_NETTOYE.txt"
+  }
+}

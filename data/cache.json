@@ -1,0 +1,17 @@
+{
+  "bouygue.txt": {
+    "nom": "Bouygue",
+    "lignes": 6314574,
+    "chemin": "bases\\bouygue.txt"
+  },
+  "free.txt": {
+    "nom": "Free",
+    "lignes": 96208,
+    "chemin": "bases\\free.txt"
+  },
+  "sfr.txt": {
+    "nom": "Sfr",
+    "lignes": 178399,
+    "chemin": "bases\\sfr.txt"
+  }
+}

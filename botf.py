@@ -78,7 +78,7 @@ ADMINS = [
 ]
 ADMIN_IDS = [admin["id"] for admin in ADMINS]
 
-WELCOME_MSG = "🛍️ *Bienvenue chez Picco !*"
+WELCOME_MSG = "🛍️ *Bienvenue chez BLACKCAT !*"
 DOSSIER_BASES = "bases"
 DATA_DIR = "data"
 PRIX_PAR_MILLE = 50  # en euros

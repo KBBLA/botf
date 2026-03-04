@@ -19,6 +19,8 @@ import requests
 from datetime import datetime, timedelta
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes, JobQueue
+import threading
+from http.server import HTTPServer, BaseHTTPRequestHandler
 
 # ========== CAPTURE D'ERREUR AU DÉMARRAGE ==========
 try:
@@ -28,39 +30,26 @@ except Exception as e:
     print("ERREUR AU DÉMARRAGE:", str(e), flush=True)
     sys.exit(1)
 
-# ========== AJOUTE CES LIGNES ICI ==========
-# Pour Render Web Service
-import threading
-import sys
-
+# ========== SERVEUR HTTP POUR RENDER ==========
 port = int(os.environ.get('PORT', 10000))
 print(f"Bot démarré sur le port {port}", flush=True)
 
-def keep_alive():
-    while True:
-        print("Bot actif...", file=sys.stdout, flush=True)
-        time.sleep(300)
+class HealthCheckHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b"OK")
+    def log_message(self, format, *args):
+        pass
 
-threading.Thread(target=keep_alive, daemon=True).start()
-# ============================================
-# ========== AJOUTE CES LIGNES ICI ==========
-# Pour Render Web Service
-import threading
-import time
-import sys
+def run_http_server():
+    server = HTTPServer(('0.0.0.0', port), HealthCheckHandler)
+    print(f"Serveur HTTP démarré sur le port {port}", flush=True)
+    server.serve_forever()
 
-port = int(os.environ.get('PORT', 10000))
-print(f"Bot démarré sur le port {port}")
-
-def keep_alive():
-    while True: 
-     print("Bot actif...", file=sys.stdout)
-     time.sleep(300)
-
-# Lance la fonction keep_alive en arrière-plan
-threading.Thread(target=keep_alive, daemon=True).start()
-# ============================================
-
+# Lancer le serveur dans un thread séparé
+threading.Thread(target=run_http_server, daemon=True).start()
+# ==============================================
 # ==================== CONFIGURATION ====================
 BOT_TOKEN = "8695192616:AAEkXEBS3Hlw8G5ZhPBOGJpfHdvTKvnAEJ0"
 
